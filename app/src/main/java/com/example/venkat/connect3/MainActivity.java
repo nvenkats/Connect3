@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView counter = (ImageView) view;
         counter.setTranslationY(-1000f);
         counter.setImageResource(R.drawable.yellow);
-        counter.animate().translationYBy(1000f).setDuration(300);
+        counter.animate().translationYBy(1000f).rotation(360).setDuration(300);
     }
 
     @Override
