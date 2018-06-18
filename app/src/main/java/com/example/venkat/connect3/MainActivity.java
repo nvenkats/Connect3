@@ -15,17 +15,24 @@ public class MainActivity extends AppCompatActivity {
 
     public void dropIn(View view) {
         ImageView counter = (ImageView) view;
-        counter.setTranslationY(-1000f);
+        System.out.println(counter.getTag().toString());
+        int tappedCounter = Integer.parseInt(counter.getTag().toString());
 
-        if(activePlayer==0) {
-            counter.setImageResource(R.drawable.yellow);
-            activePlayer = 1;
+        if(gameState[tappedCounter] == 2) {
+
+            counter.setTranslationY(-1000f);
+
+            gameState[tappedCounter] = activePlayer; //saves the move of the current player
+
+            if (activePlayer == 0) {
+                counter.setImageResource(R.drawable.yellow);
+                activePlayer = 1;
+            } else {
+                counter.setImageResource(R.drawable.red);
+                activePlayer = 0;
+            }
+            counter.animate().translationYBy(1000f).rotation(360).setDuration(300);
         }
-        else {
-            counter.setImageResource(R.drawable.red);
-            activePlayer = 0;
-        }
-        counter.animate().translationYBy(1000f).rotation(360).setDuration(300);
     }
 
     @Override
