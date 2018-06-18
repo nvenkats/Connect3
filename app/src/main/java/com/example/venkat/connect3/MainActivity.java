@@ -1,11 +1,13 @@
 package com.example.venkat.connect3;
 
 import android.graphics.Color;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -69,6 +71,33 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    public void playAgain(View view) {
+
+        System.out.println("playAgain called");
+
+        Animation slideDown = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down);
+        LinearLayout playAgainLayout = (LinearLayout)findViewById(R.id.playAgainLayout);
+        playAgainLayout.startAnimation(slideDown);
+        playAgainLayout.setVisibility(View.INVISIBLE);
+
+        System.out.println("Layout gone");
+
+        activePlayer = 0;
+        isGameNotWon = 0;
+        for(int i = 0; i<gameState.length; i++) {
+            gameState[i] = 2;
+        }
+
+        System.out.println("Array state reset");
+
+        android.support.v7.widget.GridLayout gridLayout = (android.support.v7.widget.GridLayout)findViewById(R.id.gridLayout);
+        for(int i = 0; i<gridLayout.getChildCount(); i++) {
+            ((ImageView) gridLayout.getChildAt(i)).setImageResource(0);
+        }
+
+        System.out.println("Image reset");
     }
 
     @Override
