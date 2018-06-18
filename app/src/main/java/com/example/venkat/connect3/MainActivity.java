@@ -1,9 +1,14 @@
 package com.example.venkat.connect3;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.io.Console;
 
@@ -45,8 +50,21 @@ public class MainActivity extends AppCompatActivity {
                     if (gameState[winningPosition[0]] == gameState[winningPosition[1]] &&
                             gameState[winningPosition[1]] == gameState[winningPosition[2]] &&
                             gameState[winningPosition[0]] != 2) {
+                        //someone has won
                         System.out.println(gameState[winningPosition[0]]);
                         isGameNotWon = 1;
+                        String winner = "Red";
+                        TextView winnerMessage = (TextView)findViewById(R.id.winnerMessage);
+                        winnerMessage.setTextColor(Color.RED);
+                        if(gameState[winningPosition[0]] == 0) {
+                            winner = "Yellow";
+                            winnerMessage.setTextColor(Color.YELLOW);
+                        }
+                        winnerMessage.setText(winner + " has won!");
+                        Animation slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
+                        LinearLayout playAgainLayout = (LinearLayout)findViewById(R.id.playAgainLayout);
+                        playAgainLayout.startAnimation(slideUp);
+                        playAgainLayout.setVisibility(View.VISIBLE);
                     }
                 }
             }
